@@ -104,6 +104,7 @@ function CodeBlock(code) {
           },
         },
       ],
+      language: "plain text",
     },
   };
 }
@@ -122,14 +123,12 @@ async function traverse(jsonObj, parent_id) {
         traverse(value, parent);
       } else {
         const children = [];
-        const code = null;
+        let code = null;
 
         try {
-          code = Check.IfCanWriteToDirectory(
-            fs.readFileSync(Check.IfPathFormat(value.path), {
-              encoding: "utf8",
-            })
-          );
+          code = fs.readFileSync(Check.IfPathFormat(value.path), {
+            encoding: "utf8",
+          });
         } catch (error) {
           console.error(error);
         }
@@ -137,8 +136,6 @@ async function traverse(jsonObj, parent_id) {
         if (value?.summary && typeof value.summary === "string") {
           children.push(Heading("Summary"));
           children.push(Paragraph(value.summary));
-          children.push(Heading("Code"));
-          if (code) children.push(CodeBlock(code));
         }
 
         await createPage({

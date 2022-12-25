@@ -34,7 +34,7 @@ async function summarizeCode(text, filter, file_or_folder) {
   const completion = await Check.APIRequests.OpenAI(() =>
     _static.openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Create a short, succint documentation for the corresponding Code:\n${text}\nREADME.md:\n`,
+      prompt: `Create a short, succint documentation, including function interfaces and a summary of the code:\n${text}\nDocumentation:\n`,
       max_tokens: 700,
       temperature: 0,
       ...open_ai_config,

@@ -3,45 +3,45 @@
     "traverse_directory.js": {
       "file_name": "traverse_directory.js",
       "number_of_characters": 2022,
-      "summary": "",
+      "summary": "\nInterface(root_folder, object, filter)\n\nThis function takes in a root folder, an object, and a filter as parameters. It traverses the root folder and its subdirectories, and stores the file names and summaries of the files in the object. It also stores the total number of tokens in the _static object.\n\nshould_ignore(file_or_folder, ignore_functions)\n\nThis function takes in a file or folder name and an array of ignore functions as parameters. It checks if the file or folder should be ignored based on the ignore functions, and returns a boolean value.\n\nnumber_of_tokens(string)\n\nThis function takes in a string as a parameter and returns the number of tokens in the string divided by 4.",
       "path": "./algorithms/traverse_directory.js"
     }
   },
   "documenter.js": {
     "file_name": "documenter.js",
-    "number_of_characters": 1076,
-    "summary": "",
+    "number_of_characters": 986,
+    "summary": "\nFunction Interfaces:\n\nconfigure(options):\n  - options: an object containing the configuration options for the Documentation module\n\ngenerateDirectoryTree():\n  - returns a Promise that resolves to a tree object representing the directory structure of the root folder\n\ngetQuote():\n  - returns a random number between 0 and 1\n\ndocument():\n  - returns a Promise that resolves to a tree object representing the directory structure of the root folder, with documentation generated for each file\n\nsaveDirectoryTree():\n  - saves the directory tree object to a JSON file\n\nsaveToNotion(tree):\n  - saves the directory tree object to a Notion page\n\nSummary:\n\nThe Documentation module provides a set of functions for generating documentation for a given directory structure. It can be configured with options such as API keys and a root folder path. The generateDirectoryTree() function returns a Promise that resolves to a tree object representing the directory structure of the root folder. The getQuote() function returns a random number between 0 and 1. The document() function returns a Promise that resolves to a tree object representing the directory structure of the root folder, with documentation generated for each file. The saveDirectoryTree() function saves the directory tree object to a JSON file, and the saveToNotion() function saves the directory tree object to a Notion page.",
     "path": "./documenter.js"
   },
   "errors/": {
     "ErrorChecks.js": {
       "file_name": "ErrorChecks.js",
       "number_of_characters": 1790,
-      "summary": "",
+      "summary": "\nCheck\n\nIfCanIgnore(ignore, file_or_folder): Checks if a file or folder should be ignored based on the ignore function passed in.\n\nIfValidDirectory(current_route): Checks if the current route is a valid directory. Throws an error if it is not.\n\nIfCanWriteToDirectory(path, text): Checks if the path is valid and if it is, writes the text to the path. Throws an error if the path is not valid.\n\nAPIRequests\n\nOpenAI(request): Makes an API request to OpenAI. Returns the response.\n\nIfKeysDefined(keys): Checks if the OpenAI and Notion keys are defined. Throws an error if they are not.\n\nIfValidConfig(config): Checks if the root folder path and filter are valid. Throws an error if they are not.\n\nIfPathFormat(path): Checks if the path is a valid string. Throws an error if it is not.\n\nErrors\n\nNotConfigured(): Throws an error if the config is not set.\n\nTreeDoesNotExist(): Throws an error if the directory tree does not exist.\n\nNotion\n\nMissingSaveData(): Throws an error if data is not passed to the .saveToNotion() function.",
       "path": "./errors/ErrorChecks.js"
     }
   },
   "index.js": {
     "file_name": "index.js",
     "number_of_characters": 2610,
-    "summary": "",
+    "summary": "\nThis code provides an interface for creating a directory tree, generating a quote for the total number of tokens, and saving the directory tree to Notion. \n\nFunction Interfaces:\n\nconfigure(options): Configures the interface with the given options. Options should include keys, root_folder_path, and filter.\n\ndocument(): Generates a directory tree.\n\ngenerateDirectoryTree(): Generates a directory tree.\n\nsaveDirectoryTree(): Saves the directory tree to a file.\n\ngetQuote(): Generates a quote for the total number of tokens.\n\nsaveToNotion(): Saves the directory tree to Notion.\n\ngetDirectoryTree(): Returns the directory tree.",
     "path": "./index.js"
   },
   "Notion/": {
     "Notion.js": {
       "file_name": "Notion.js",
-      "number_of_characters": 3412,
-      "summary": "",
+      "number_of_characters": 3286,
+      "summary": "\nThis code provides an interface for saving data to Notion. It requires the @notionhq/client and fs packages. The interface provides two functions: saveToNotion and intialize. \n\nsaveToNotion(data):\n  - Asynchronously traverses the data object and saves it to Notion.\n  - Logs a success message to the console.\n\nintialize(config):\n  - Takes a config object containing a key and page_id.\n  - Initializes the Notion client with the given key.\n  - Sets the page_id to the given page_id.\n\ngetKey():\n  - Returns the key used to initialize the Notion client.\n\nThe code also contains several helper functions for creating pages, headings, paragraphs, and code blocks.",
       "path": "./Notion/Notion.js"
     }
   },
   "OpenAi/": {
     "openai.js": {
       "file_name": "openai.js",
-      "number_of_characters": 1342,
-      "summary": "",
+      "number_of_characters": 1376,
+      "summary": "\nInterface:\nintialize(config): Initializes the OpenAI API with the given configuration.\nsummarizeCode(text, filter, file_or_folder): Summarizes the given text using OpenAI's text-davinci-003 model.\n\nSummary:\nThis code provides an interface for using OpenAI's text-davinci-003 model to summarize text. It provides a function to initialize the OpenAI API with a given configuration and a function to summarize text using the model.",
       "path": "./OpenAi/openai.js"
     }
   },
-  "_static": { "total_tokens": 3063 }
+  "_static": { "total_tokens": 6035 }
 }

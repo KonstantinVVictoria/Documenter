@@ -2,8 +2,8 @@ const Documentation = require("./index");
 
 Documentation.configure({
   keys: {
-    openai: "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",
-    notion: "secret_6XtiJrubZQ6zvBPlck8sZcSoalCACNv99bEL3v8eKkM",
+    openai: "<key>",
+    notion: "<key>",
   },
   root_folder_path: "./",
   filter: {
@@ -20,18 +20,16 @@ Documentation.configure({
       summarize: true,
     },
     notion: {
-      page_id: "9ac4e16b5d24428aa5429ef54b898ad0",
+      page_id: "<pageid>",
     },
   },
 });
 
 Documentation.generateDirectoryTree().then((tree) => {
   let quote = Documentation.getQuote();
-  Documentation.saveDirectoryTree();
-  Documentation.saveToNotion(tree);
-  // if (quote < 0.5)
-  //   Documentation.document().then((tree) => {
-  //     Documentation.saveDirectoryTree();
-  //     Documentation.saveToNotion(tree);
-  //   });
+  if (quote < 0.5)
+    Documentation.document().then((tree) => {
+      Documentation.saveDirectoryTree();
+      Documentation.saveToNotion(tree);
+    });
 });
