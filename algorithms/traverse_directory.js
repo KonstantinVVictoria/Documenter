@@ -1,38 +1,77 @@
+const { Check } = require("../errors/ErrorChecks");
+const OpenAI = require("../OpenAi/openai");
 const fs = require("fs");
-let _meta = {
+let _static = {
   total_tokens: 0,
 };
-function traverse(current_route, current_directory) {
-  let items = null;
-  let current_item = null;
-  items = fs.readdirSync(current_route);
-  for (const item of items) {
-    current_item = item;
-    if (item === "node_modules" || item === ".next") continue;
-    current_directory[item] = {};
+
+let Interface = async (root_folder, object, filter) => {
+  let directory_tree = await traverse(
+    root_folder,
+    object,
+    filter,
+    fs.readdirSync(root_folder)
+  );
+  directory_tree._static = _static;
+  return directory_tree;
+};
+
+async function traverse(
+  current_path,
+  current_directory,
+  filter,
+  directory_children = []
+) {
+  const how_to_ignore = filter?.ignore;
+  for (const file_or_folder of directory_children) {
+    if (should_ignore(file_or_folder, how_to_ignore)) continue;
+
     try {
-      traverse(current_route + item + "/", current_directory[item]);
+      let children = fs.readdirSync(current_path + file_or_folder + "/");
+      current_directory[file_or_folder + "/"] = {};
+      await traverse(
+        current_path + file_or_folder + "/",
+        current_directory[file_or_folder + "/"],
+        filter,
+        children
+      );
     } catch (error) {
-      let file_content = fs.readFileSync(current_route + item, {
-        encoding: "utf8",
-      });
-      current_directory[item] = {
-        file_name: item,
+      let file_content = fs.readFileSync(
+        Check.IfPathFormat(current_path + file_or_folder),
+        {
+          encoding: "utf8",
+        }
+      );
+      current_directory[file_or_folder] = {
+        file_name: file_or_folder,
         number_of_characters: file_content.length,
+        summary: await OpenAI.summarizeCode(
+          file_content,
+          filter,
+          file_or_folder
+        ),
+        path: current_path + file_or_folder,
       };
-      _meta.total_tokens += number_of_tokens(
-        current_directory[item].number_of_characters
+      _static.total_tokens += number_of_tokens(
+        current_directory[file_or_folder].number_of_characters
       );
     }
   }
+
   return current_directory;
+}
+
+function should_ignore(file_or_folder, ignore_functions) {
+  if (ignore_functions === undefined) return false;
+  for (const ignore of ignore_functions) {
+    if (Check.IfCanIgnore(ignore, file_or_folder)) {
+      return true;
+    }
+  }
+  return false;
 }
 
 function number_of_tokens(string) {
   return string / 4;
 }
-module.exports = (root, object) => {
-  let directory_tree = traverse(root, object);
-  directory_tree._meta = _meta;
-  return directory_tree;
-};
+module.exports = Interface;

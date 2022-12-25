@@ -1,0 +1,47 @@
+{
+  "algorithms/": {
+    "traverse_directory.js": {
+      "file_name": "traverse_directory.js",
+      "number_of_characters": 2022,
+      "summary": "",
+      "path": "./algorithms/traverse_directory.js"
+    }
+  },
+  "documenter.js": {
+    "file_name": "documenter.js",
+    "number_of_characters": 1076,
+    "summary": "",
+    "path": "./documenter.js"
+  },
+  "errors/": {
+    "ErrorChecks.js": {
+      "file_name": "ErrorChecks.js",
+      "number_of_characters": 1790,
+      "summary": "",
+      "path": "./errors/ErrorChecks.js"
+    }
+  },
+  "index.js": {
+    "file_name": "index.js",
+    "number_of_characters": 2610,
+    "summary": "",
+    "path": "./index.js"
+  },
+  "Notion/": {
+    "Notion.js": {
+      "file_name": "Notion.js",
+      "number_of_characters": 3412,
+      "summary": "",
+      "path": "./Notion/Notion.js"
+    }
+  },
+  "OpenAi/": {
+    "openai.js": {
+      "file_name": "openai.js",
+      "number_of_characters": 1342,
+      "summary": "",
+      "path": "./OpenAi/openai.js"
+    }
+  },
+  "_static": { "total_tokens": 3063 }
+}
