@@ -15,6 +15,8 @@ npm install @adasuite/documenter
 yarn add @adasuite/documenter
 ```
 
+To integrate with Notion:
+
 # Usage
 
 To use @adasuite/documenter, you will need to require it in your code:
@@ -22,6 +24,26 @@ To use @adasuite/documenter, you will need to require it in your code:
 ```js
 const Documentation = require("@adasuite/documenter");
 ```
+
+To integrate it with Notion:
+
+1. Go to [https://www.notion.so/my-integrations](https://www.notion.so/my-integrations)
+   ![alt text](https://lh4.googleusercontent.com/TRM-BqSt_FsMKznuWkUcT8miuDajNG6vdQUaLz35Jppks-tVq_f5xaOE9yWrLibDUhw=w2400)
+2. Click "New Integration"
+   ![alt text](https://lh5.googleusercontent.com/jOBTufaGLGsI8zK74RnQHGB4ootherTr27oUdnXZAGtNeoiqQLEfbPZBwVh-n0Wfg3o=w2400)
+   Name the integration, and, optionally, upload ban image. Then select an Associated workspace for the integration to work under.
+
+3. Change the capabilities of the integration to:
+   ![alt text](https://lh5.googleusercontent.com/BhSdD82xoafrrreHy1fz5ONKm5cF8eDvT44DhimXSL1LPyWGvOc-Ok_sGGQ8e4sYVZs=w2400)
+
+4. Save the API key, and pass it to **Documentation.configure({keys:{notion:"key"}})**
+   ![alt text](https://lh4.googleusercontent.com/MbF24vtG4ZD16YYRlbfsabcsgLuOAtKuWvs4oSK0jfyvfp3fH6NEC9LoW9D3aX8Yq5g=w2400)
+
+5. Navigate to the page in which you want your documentation to be stored:
+   ![alt text](https://lh6.googleusercontent.com/a5MBVzuVaVO5RHog3LjNetSLkC-QOsgws95svMIINrXrXX5M9QoNbDl4YnQyab7-CXs=w2400)
+
+6. Copy the page_id and pass it to **Documentation.configure({filters:{notion:{page_id:"page_id"}}})**
+   ![alt text](https://lh5.googleusercontent.com/p9LjLMKlo_fh_BhOf-mOCtLW953Ya5OSiI5ccT4m1INBxv8UFhyccx1XPoh9_Inus_A=w2400)
 
 ## Documentation.configure()
 
