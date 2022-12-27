@@ -2,6 +2,8 @@
 
 @adasuite/documenter is a JavaScript package that allows you to generate and save documentation for a project directory. It provides several methods for configuring the documentation process and saving the generated documentation to various locations.
 
+[Link to Documentation and Showcase](https://www.notion.so/kvictoria/Documenter-9ac4e16b5d24428aa5429ef54b898ad0)
+
 # Installation
 
 To install @adasuite/documenter, you can use npm or yarn:
@@ -51,7 +53,16 @@ You can then use the **Documentation.configure()** method to set various options
 
 **keys** an object containing API keys for OpenAI and Notion.
 **root_folder_path:** the root directory for the documentation process.
+
+### filter object
+
 **filter:** an object containing conditions for ignoring certain files or folders and specifying options for summarization and error reporting for OpenAI and Notion.
+
+**filter.ignore: [(file_or_folder)=>{},...]** the ignore property is an array of functions that takes in a name of a folder or file and then returns a conditionals regarding the names. These functions allow you to filter out certain files or folder.
+
+**filter.openai:** the openai property can contain **openai.summarize = true|false**, which if true will summarize each file or **openai.listErrors = true|false**, which if true will list all the possible errors in each file.
+
+**filter.notion:** the notion property can contain **notion.page_id = string**, which if defined will save the documentation to the page with that page_id.
 
 ## Documentation.generateDirectoryTree()
 
