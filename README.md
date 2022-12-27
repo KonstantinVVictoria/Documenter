@@ -60,7 +60,10 @@ You can then use the **Documentation.configure()** method to set various options
 
 **filter.ignore: [(file_or_folder)=>{},...]** the ignore property is an array of functions that takes in a name of a folder or file and then returns a conditionals regarding the names. These functions allow you to filter out certain files or folder.
 
-**filter.openai:** the openai property can contain **openai.summarize = true|false**, which if true will summarize each file or **openai.listErrors = true|false**, which if true will list all the possible errors in each file.
+**filter.openai:** the openai property can contain
+**openai.summarize = true|false**, which if true will summarize each file.
+**openai.listErrors = true|false**, which if true will list all the possible errors in each file.
+**openai.customPrompt = (text) => `${text}`** is a function that takes in the contents of a file in the form of a string, and then returns a prompt including the string.
 
 **filter.notion:** the notion property can contain **notion.page_id = string**, which if defined will save the documentation to the page with that page_id.
 
