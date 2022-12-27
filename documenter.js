@@ -1,6 +1,6 @@
 require("dotenv").config();
 const Documentation = require("./index");
-console.log(process.env);
+
 Documentation.configure({
   keys: {
     openai: process.env.OPENAI_KEY,
@@ -14,7 +14,8 @@ Documentation.configure({
         file_or_folder === ".vscode" ||
         file_or_folder === ".git" ||
         file_or_folder === ".gitignore" ||
-        file_or_folder === "README.md",
+        file_or_folder === "README.md" ||
+        file_or_folder === ".env",
       (file_or_folder) => file_or_folder.search(".json") !== -1,
     ],
     openai: {

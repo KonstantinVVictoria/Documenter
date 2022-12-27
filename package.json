@@ -1,17 +1,31 @@
 {
-  "name": "autodocumentor",
+  "name": "@adasuite/documenter",
   "version": "1.0.0",
-  "description": "",
+  "description": "Documenter is a program that uses the OpenAI API to generate documentation for all the files in your project. With Documenter, you can easily keep track of your project's documentation and have it all in one place.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Konstantin Victoria",
+  "license": "MIT",
   "dependencies": {
     "@notionhq/client": "^2.2.3",
     "chalk": "^4.0.0",
     "dotenv": "^16.0.3",
     "openai": "^3.1.0"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KonstantinVVictoria/Documenter.git"
+  },
+  "keywords": [
+    "Documentation",
+    "OpenAI",
+    "Notion"
+  ],
+  "bugs": {
+    "url": "https://github.com/KonstantinVVictoria/Documenter/issues"
+  },
+  "homepage": "https://github.com/KonstantinVVictoria/Documenter#readme"
 }
