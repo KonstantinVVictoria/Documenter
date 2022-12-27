@@ -1,5 +1,4 @@
 const fs = require("fs");
-const OpenAI = require("../OpenAi/openai");
 module.exports.Check = {
   IfCanIgnore: (ignore, file_or_folder) => {
     return ignore(file_or_folder);
@@ -54,7 +53,7 @@ module.exports.Check = {
 };
 
 module.exports.Errors = {
-  NotConfgured: () => {
+  NotConfigured: () => {
     throw "Documenter|Error: Make sure to run .config() first";
   },
   TreeDoesNotExist: () => {

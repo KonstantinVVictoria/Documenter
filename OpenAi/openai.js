@@ -9,13 +9,13 @@ const _static = {
 const State = { number_of_queries: 0 };
 
 const Interface = {
-  intialize: intialize,
+  initialize: initialize,
   summarizeCode: summarizeCode,
   getKey: () => _static.key,
   listErrors: listErrors,
 };
 
-function intialize(config) {
+function initialize(config) {
   let { key } = config;
   const configuration = new Configuration({
     apiKey: key,
@@ -31,7 +31,7 @@ async function summarizeCode(text, filter, file_or_folder) {
   const completion = await Check.APIRequests.OpenAI(() =>
     _static.openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Create a short, succint documentation, including function interfaces and a summary of the code:\n${text}\nDocumentation:\n`,
+      prompt: `Create a short, succinct documentation, including function interfaces and a summary of the code:\n${text}\nDocumentation:\n`,
       max_tokens: 700,
       temperature: 0,
       ...(filter.openai.config || {}),
@@ -39,7 +39,7 @@ async function summarizeCode(text, filter, file_or_folder) {
   );
 
   console.log(
-    "Documentor|Open AI|API|Summary: Query #" +
+    "Documenter|Open AI|API|Summary: Query #" +
       ++State.number_of_queries +
       " -- " +
       file_or_folder

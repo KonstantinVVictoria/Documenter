@@ -12,11 +12,11 @@ let Interface = {
     await traverse(data, _static.page_id);
     console.log("Saved to Notion Successfully");
   },
-  intialize: intialize,
+  initialize: initialize,
   getKey: () => _static.key,
 };
 
-function intialize(config) {
+function initialize(config) {
   let { key, page_id } = config;
 
   _static.Notion = new Client({

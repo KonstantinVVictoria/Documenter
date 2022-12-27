@@ -1,8 +1,10 @@
+require("dotenv").config();
 const Documentation = require("./index");
+
 Documentation.configure({
   keys: {
-    openai: "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",
-    notion: "secret_6XtiJrubZQ6zvBPlck8sZcSoalCACNv99bEL3v8eKkM",
+    openai: process.env.OPENAI_KEY,
+    notion: process.env.NOTION_KEY,
   },
   root_folder_path: "./",
   filter: {

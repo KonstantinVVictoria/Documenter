@@ -17,15 +17,15 @@ const State = {};
 const Interface = {
   Directory: {},
   configure: configure,
-  generateDirectoryTree: () => Errors.NotConfgured(),
-  saveDirectoryTree: () => Errors.NotConfgured(),
-  document: () => Errors.NotConfgured(),
-  getQuote: () => Errors.NotConfgured(),
+  generateDirectoryTree: () => Errors.NotConfigured(),
+  saveDirectoryTree: () => Errors.NotConfigured(),
+  document: () => Errors.NotConfigured(),
+  getQuote: () => Errors.NotConfigured(),
   getDirectoryTree: () => {
     if (Interface.Directory !== {}) return Interface.Directory;
     else Errors.TreeDoesNotExist();
   },
-  saveToNotion: () => Errors.NotConfgured(),
+  saveToNotion: () => Errors.NotConfigured(),
 };
 
 function configure({ keys, root_folder_path, filter = {} }) {
@@ -35,10 +35,10 @@ function configure({ keys, root_folder_path, filter = {} }) {
   _static.keys = Check.IfKeysDefined(keys);
   _static.root_folder_path = Check.IfPathFormat(root_folder_path);
   //Initialize:
-  if (openAIisInitialized()) OpenAI.intialize({ key: _static.keys.openai });
+  if (openAIisInitialized()) OpenAI.initialize({ key: _static.keys.openai });
 
   if (notionIsInitialized(filter))
-    Notion.intialize({
+    Notion.initialize({
       key: _static.keys.notion,
       page_id: filter.notion.page_id,
     });
@@ -59,7 +59,7 @@ function configure({ keys, root_folder_path, filter = {} }) {
 
   Interface.saveDirectoryTree = () =>
     Check.IfCanWriteToDirectory(
-      root_folder_path + "/Documenation.json",
+      root_folder_path + "/Documentation.json",
       JSON.stringify(Interface.Directory)
     );
 
