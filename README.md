@@ -58,8 +58,8 @@ const Documentation = require("@adasuite/documenter");
 
 Documentation.configure({
   keys: {
-    openai: "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",
-    notion: "secret_6XtiJrubZQ6zvBPlck8sZcSoalCACNv99bEL3v8eKkM",
+    openai: "<key>",
+    notion: "<key>",
   },
   root_folder_path: "./",
   filter: {
@@ -87,7 +87,7 @@ Documentation.configure({
       listErrors: true,
     },
     notion: {
-      page_id: "9ac4e16b5d24428aa5429ef54b898ad0",
+      page_id: "<page_id>",
     },
   },
 });
