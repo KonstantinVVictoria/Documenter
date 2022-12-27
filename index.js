@@ -76,6 +76,7 @@ function getQuote(number_of_tokens) {
   const multiplier = [
     Interface?.filter?.openai?.summarize || true,
     Interface?.filter?.openai?.listErrors || true,
+    Interface?.filter?.openai?.customPrompt || true,
   ].reduce((current_sum, current_value) => current_sum + current_value, 1);
 
   let numerical_price =
