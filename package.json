@@ -1,6 +1,6 @@
 {
   "name": "@adasuite/documenter",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Documenter is a program that uses the OpenAI API to generate documentation for all the files in your project. With Documenter, you can easily keep track of your project's documentation and have it all in one place.",
   "main": "index.js",
   "scripts": {
