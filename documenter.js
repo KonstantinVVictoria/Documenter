@@ -1,6 +1,6 @@
 require("dotenv").config();
 const Documentation = require("./index");
-
+console.log(process.env);
 Documentation.configure({
   keys: {
     openai: process.env.OPENAI_KEY,

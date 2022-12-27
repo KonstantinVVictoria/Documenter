@@ -31,7 +31,7 @@ async function summarizeCode(text, filter, file_or_folder) {
   const completion = await Check.APIRequests.OpenAI(() =>
     _static.openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `Create a short, succinct documentation, including function interfaces and a summary of the code:\n${text}\nDocumentation:\n`,
+      prompt: `Create a short, succinct documentation, listing function interfaces and a summary of the code:\n${text}\nDocumentation:\n`,
       max_tokens: 700,
       temperature: 0,
       ...(filter.openai.config || {}),
@@ -57,7 +57,7 @@ async function listErrors(text, filter, file_or_folder) {
   const completion = await Check.APIRequests.OpenAI(() =>
     _static.openai.createCompletion({
       model: "text-davinci-003",
-      prompt: `List possible errors in the code, and how you might improve it:\n${text}\nAnalysis:\n`,
+      prompt: `List the possible errors in the code, and how you might improve it overall:\n${text}\nAnalysis:\n`,
       max_tokens: 700,
       temperature: 0,
       ...(filter.openai.config || {}),
@@ -65,7 +65,7 @@ async function listErrors(text, filter, file_or_folder) {
   );
 
   console.log(
-    "Documentor|Open AI|API|List Errors: Query #" +
+    "Documenter|Open AI|API|List Errors: Query #" +
       ++State.number_of_queries +
       " -- " +
       file_or_folder
