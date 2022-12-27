@@ -18,6 +18,11 @@ module.exports.Check = {
   },
   APIRequests: {
     OpenAI: async (request) => {
+      try {
+        request();
+      } catch (error) {
+        console.error(error);
+      }
       return request();
     },
   },
@@ -40,6 +45,11 @@ module.exports.Check = {
       return path;
     } else
       throw "Documenter|Error: root_folder_path must be configured as a path string.";
+  },
+  IfOpenAIConfigured: (filter) => {
+    if (filter?.openai === undefined || filter?.openai.summarize === false)
+      throw "";
+    else return true;
   },
 };
 

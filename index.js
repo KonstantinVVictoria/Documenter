@@ -12,33 +12,32 @@ const _static = {
   root_folder_path: "",
 };
 
-let Interface = {
+const State = {};
+
+const Interface = {
+  Directory: {},
   configure: configure,
-  document: () => Errors.NotConfgured(),
   generateDirectoryTree: () => Errors.NotConfgured(),
   saveDirectoryTree: () => Errors.NotConfgured(),
+  document: () => Errors.NotConfgured(),
   getQuote: () => Errors.NotConfgured(),
-  saveToNotion: () => Errors.NotConfgured(),
-  Directory: {},
   getDirectoryTree: () => {
     if (Interface.Directory !== {}) return Interface.Directory;
     else Errors.TreeDoesNotExist();
   },
+  saveToNotion: () => Errors.NotConfgured(),
 };
 
-function configure({ keys, root_folder_path, filter }) {
+function configure({ keys, root_folder_path, filter = {} }) {
   //Check:
-  if (filter === undefined) filter = [];
+
+  if (filter?.ignore === undefined) filter.ignore = [];
   _static.keys = Check.IfKeysDefined(keys);
   _static.root_folder_path = Check.IfPathFormat(root_folder_path);
   //Initialize:
-  OpenAI.intialize({ key: _static.keys.openai });
-  if (
-    _static.keys?.notion !== undefined &&
-    typeof _static.keys?.notion === "string" &&
-    filter?.notion &&
-    filter?.notion.page_id
-  )
+  if (openAIisInitialized()) OpenAI.intialize({ key: _static.keys.openai });
+
+  if (notionIsInitialized(filter))
     Notion.intialize({
       key: _static.keys.notion,
       page_id: filter.notion.page_id,
@@ -51,23 +50,36 @@ function configure({ keys, root_folder_path, filter }) {
         summarize: false,
       },
     });
-  Interface.document = async () => await document(filter);
+
+  Interface.document = openAIisInitialized()
+    ? async () => await document(filter)
+    : Interface.document;
+
   Interface.getQuote = () => getQuote(Interface.Directory._static.total_tokens);
+
   Interface.saveDirectoryTree = () =>
     Check.IfCanWriteToDirectory(
       root_folder_path + "/Documenation.json",
       JSON.stringify(Interface.Directory)
     );
-  Interface.saveToNotion = _static.keys?.notion
+
+  Interface.saveToNotion = notionIsInitialized(filter)
     ? Notion.saveToNotion
     : Interface.saveToNotion;
+
   return Interface;
 }
 
 function getQuote(number_of_tokens) {
   Interface.getDirectoryTree();
+
+  const multiplier = [
+    Interface?.filter?.openai?.summarize || true,
+    Interface?.filter?.openai?.listErrors || true,
+  ].reduce((current_sum, current_value) => current_sum + current_value, 1);
+
   let numerical_price =
-    number_of_tokens * 2 * (0.02 /*dollars*/ / 1000); /*token*/
+    number_of_tokens * multiplier * (0.02 /*dollars*/ / 1000); /*token*/
 
   let price_string = Intl.NumberFormat("en-US", {
     style: "currency",
@@ -88,4 +100,19 @@ async function document(filter) {
   return Interface.Directory;
 }
 
+function notionIsInitialized(filter) {
+  return (
+    _static.keys?.notion !== undefined &&
+    typeof _static.keys?.notion === "string" &&
+    filter?.notion &&
+    filter?.notion.page_id
+  );
+}
+
+function openAIisInitialized() {
+  return (
+    _static.keys?.openai !== undefined &&
+    typeof _static.keys?.openai === "string"
+  );
+}
 module.exports = Interface;

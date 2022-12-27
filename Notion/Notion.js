@@ -137,7 +137,10 @@ async function traverse(jsonObj, parent_id) {
           children.push(Heading("Summary"));
           children.push(Paragraph(value.summary));
         }
-
+        if (value?.error && typeof value.error === "string") {
+          children.push(Heading("Errors:"));
+          children.push(Paragraph(value.error));
+        }
         await createPage({
           parent_id: parent_id,
           body: {

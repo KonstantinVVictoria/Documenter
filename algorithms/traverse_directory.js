@@ -23,15 +23,16 @@ async function traverse(
   directory_children = []
 ) {
   const how_to_ignore = filter?.ignore;
+
   for (const file_or_folder of directory_children) {
     if (should_ignore(file_or_folder, how_to_ignore)) continue;
 
     try {
       let children = fs.readdirSync(current_path + file_or_folder + "/");
-      current_directory[file_or_folder + "/"] = {};
+
       await traverse(
         current_path + file_or_folder + "/",
-        current_directory[file_or_folder + "/"],
+        (current_directory[file_or_folder + "/"] = {}),
         filter,
         children
       );
@@ -42,6 +43,7 @@ async function traverse(
           encoding: "utf8",
         }
       );
+
       current_directory[file_or_folder] = {
         file_name: file_or_folder,
         number_of_characters: file_content.length,
@@ -50,8 +52,10 @@ async function traverse(
           filter,
           file_or_folder
         ),
+        error: await OpenAI.listErrors(file_content, filter, file_or_folder),
         path: current_path + file_or_folder,
       };
+
       _static.total_tokens += number_of_tokens(
         current_directory[file_or_folder].number_of_characters
       );
